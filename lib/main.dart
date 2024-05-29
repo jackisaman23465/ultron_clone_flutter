@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ultron_clone_flutter/ui/app_router.dart';
+import 'package:ultron_clone_flutter/ui/router/app_router.dart';
 import 'package:ultron_clone_flutter/ui/ui_config.dart';
 import 'package:ultron_clone_flutter/ui/widgets/slider/custom_slider_shape.dart';
 
@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
             primaryColorLight: UIColors.primaryColorLight,
             dialogBackgroundColor: UIColors.dialogBarrierColor,
             hintColor: UIColors.placeholderTextColor,
+            dividerColor: UIColors.borderColor,
             buttonTheme: ButtonThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: UIColors.primaryColor).copyWith(
                 primary: UIColors.buttonPrimaryColor,
@@ -67,7 +68,14 @@ class MyApp extends StatelessWidget {
               trackHeight: 2.h,
               trackShape: CustomSliderShape(),
             ),
-            useMaterial3: true,
+            switchTheme: SwitchThemeData(
+            ),
+            cardColor: Colors.white,
+            cardTheme: const CardTheme(
+              surfaceTintColor: Colors.white,
+              color: Colors.white,
+            )
+            // useMaterial3: true,
           ),
         );
       },

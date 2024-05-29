@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ultron_clone_flutter/ui/ui_config.dart';
 import 'package:ultron_clone_flutter/ui/widgets/button/solid_elevated_button.dart';
 import '../../../bloc/main_cubit.dart';
-import '../../app_router.dart';
+import '../../router/app_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                             vertical: 0.h,
                             horizontal: 4.w,
                           ),
-                          onTap: () {},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -187,7 +187,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   FractionallySizedBox(
                                     widthFactor: 0.5, // 佔據父容器寬度的一半
                                     child: SolidElevatedButton(
-                                      onTap: () => context.push(Routes.qrcodeScanPage),
+                                      rippleColor: Colors.white.withOpacity(0.25),
+                                      onPressed: () => context.push(Routes.qrcodeScanPage),
                                       padding: EdgeInsets.all(4.h),
                                       child: const Text('加入裝置'),
                                     ),

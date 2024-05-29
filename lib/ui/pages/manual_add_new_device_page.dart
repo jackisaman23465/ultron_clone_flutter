@@ -2,43 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../ui_config.dart';
-import '../../widgets/appbar/custom_app_bar.dart';
+import '../ui_config.dart';
+import '../widgets/appbar/custom_app_bar.dart';
 
-class AutomatedScenarioPage extends StatefulWidget {
-  const AutomatedScenarioPage({super.key});
+class ManualAddNewDevicePage extends StatefulWidget {
+  const ManualAddNewDevicePage({super.key});
 
   @override
-  State<AutomatedScenarioPage> createState() => _AutomatedScenarioPageState();
+  State<ManualAddNewDevicePage> createState() => _ManualAddNewDevicePageState();
 }
 
-class _AutomatedScenarioPageState extends State<AutomatedScenarioPage> {
+class _ManualAddNewDevicePageState extends State<ManualAddNewDevicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar.back(
         isDarkStatusBar: true,
         barColor: Colors.transparent,
-        title: '自動化',
+        title: '手動加入裝置',
         tintColor: Theme.of(context).buttonTheme.colorScheme?.primary,
         textColor: Colors.black,
         centerTitle: true,
+        onBackPressed: () {
+          context.pop();
+        },
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(2.h),
+          preferredSize: Size.fromHeight(0.5.h),
           child: Container(
+            color: Colors.grey,
             height: 0.5.h,
-            width: MediaQuery.sizeOf(context).width,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 1,
-                  offset: Offset(0,1.h),
-                ),
-              ],
-            ),
           ),
         ),
       ),
@@ -59,17 +52,10 @@ class _AutomatedScenarioPageState extends State<AutomatedScenarioPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 20.h,
                 ),
                 Text(
-                  '讓裝置們彼此互相進行回應',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                Text(
-                  '啟用自動化操作，讓裝置們自行運用，無需再費心。',
+                  '你沒有任何新通知',
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),

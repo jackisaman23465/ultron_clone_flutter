@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ultron_clone_flutter/models/system_info.dart';
-import 'package:ultron_clone_flutter/ui/app_router.dart';
+import 'package:ultron_clone_flutter/ui/router/app_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/ui/ui_config.dart';
 import '/ui/widgets/button/outlined_elevated_button.dart';
@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               FractionallySizedBox(
                 widthFactor: 0.75, // 佔據父容器寬度的一半
                 child: SolidElevatedButton(
-                  onTap: () => context.push(Routes.mainPage),
+                  onPressed: () => context.push(Routes.mainPage),
                   backgroundColor: Theme.of(context).primaryColor,
                   child: const Text('Google 登入'),
                 ),
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               FractionallySizedBox(
                 widthFactor: 0.75, // 佔據父容器寬度的一半
                 child: OutlinedElevatedButton(
-                  onTap: () => context.push(Routes.mainPage),
+                  onPressed: () => context.push(Routes.mainPage),
                   foregroundColor: Theme.of(context).primaryColor,
                   child: const Text('iOS 登入'),
                 ),

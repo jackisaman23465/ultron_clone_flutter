@@ -8,11 +8,17 @@ class MoreFunctionAtTop extends BlocDataState {}
 
 class HomeFunctionAtTop extends BlocDataState {}
 
+class GoAddNewAutomatedScenarioPage extends BlocDataState {}
+
 class MainCubit extends Cubit<BlocDataState> {
   MainCubit() : super(Init());
 
-  void showMoreFunction() {
-    emit(MoreFunction());
+  void showMoreFunction(int selectedPageIndex) {
+    if(selectedPageIndex == 0){
+      emit(MoreFunction());
+    }else{
+      emit(GoAddNewAutomatedScenarioPage());
+    }
   }
 
   void showMoreFunctionAtTop() {

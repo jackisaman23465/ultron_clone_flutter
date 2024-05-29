@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ultron_clone_flutter/bloc/bloc_state.dart';
 import 'package:ultron_clone_flutter/bloc/main_cubit.dart';
 import 'package:ultron_clone_flutter/ui/pages/main/health_page.dart';
 import 'package:ultron_clone_flutter/ui/widgets/button/solid_elevated_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../router/app_router.dart';
 import 'main/automated_scenario_page.dart';
 import 'main/home_page.dart';
 
@@ -78,7 +80,7 @@ class _MainPageState extends State<MainPage> {
                       offset: const Offset(0, -30), // Move item up by 10 pixels
                       child: GestureDetector(
                         onTap: () {
-                          context.read<MainCubit>().showMoreFunction();
+                          context.read<MainCubit>().showMoreFunction(_selectedIndex);
                         },
                         child: Column(
                           children: [
@@ -150,7 +152,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        BlocBuilder<MainCubit, BlocDataState>(
+        BlocConsumer<MainCubit, BlocDataState>(
           builder: (context, state) {
             if (state is MoreFunction) {
               return Stack(
@@ -215,7 +217,11 @@ class _MainPageState extends State<MainPage> {
             } else {
               return Container();
             }
-          },
+          }, listener: (BuildContext context, BlocDataState state) {
+            if(state is GoAddNewAutomatedScenarioPage){
+              context.push(Routes.addAutomatedScenarioPage);
+            }
+        },
         ),
       ],
     );
@@ -232,10 +238,11 @@ Widget moreFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 0.sp,
               padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 12.sp),
-              onTap: () {},
+              onPressed: () {
+                context.push(Routes.qrcodeScanPage);
+              },
               child: Row(
                 children: [
                   const Icon(
@@ -259,10 +266,9 @@ Widget moreFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 0.sp,
               padding: EdgeInsets.symmetric(horizontal: 16.sp,vertical: 12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -286,10 +292,9 @@ Widget moreFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 0.sp,
               padding: EdgeInsets.symmetric(horizontal: 16.sp,vertical: 12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -313,10 +318,9 @@ Widget moreFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 0.sp,
               padding: EdgeInsets.symmetric(horizontal: 16.sp,vertical: 12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -340,10 +344,9 @@ Widget moreFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 0.sp,
               padding: EdgeInsets.symmetric(horizontal: 16.sp,vertical: 12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -367,10 +370,9 @@ Widget moreFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 0.sp,
               padding: EdgeInsets.symmetric(horizontal: 16.sp,vertical: 12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -401,10 +403,9 @@ Widget homeFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Colors.transparent,
               foregroundColor: Theme.of(context).buttonTheme.colorScheme?.primary,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 8.r,
               padding: EdgeInsets.all(12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -428,10 +429,9 @@ Widget homeFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               foregroundColor: Colors.black,
               backgroundColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 8.r,
               padding: EdgeInsets.all(12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -452,10 +452,9 @@ Widget homeFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 8.r,
               padding: EdgeInsets.all(12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
@@ -476,10 +475,9 @@ Widget homeFunctionWidget(BuildContext context) => ClipRRect(
             SolidElevatedButton(
               backgroundColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               foregroundColor: Colors.black,
-              rippleColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1),
               borderRadius: 8.r,
               padding: EdgeInsets.all(12.sp),
-              onTap: () {},
+              onPressed: () {},
               child: Row(
                 children: [
                   const Icon(
