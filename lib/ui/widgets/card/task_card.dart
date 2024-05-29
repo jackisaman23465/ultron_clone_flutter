@@ -32,61 +32,66 @@ class _TaskCard extends State<TaskCard> with ButtonHandler {
   Widget build(BuildContext context) {
     return CustomCard(
       itemPadding: EdgeInsets.all(14.sp),
-      itemAxisAlignment: CrossAxisAlignment.start,
       onTap: widget.onTap,
       onLongPress: widget.onLongPress,
       longPressDuration: widget.longPressDuration,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.title,
-              style: Theme.of(context).textTheme.titleMedium,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                SizedBox(height: 4.sp),
+                Visibility(
+                  visible: widget.subtitle != null && widget.subtitle != "",
+                  child: Text(
+                    widget.subtitle ?? "",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                Visibility(
+                  visible: widget.description != null && widget.description != "",
+                  child: Text(
+                    widget.description ?? "",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 4.sp),
-            Visibility(
-              visible: widget.subtitle != null && widget.subtitle != "",
-              child: Text(
-                widget.subtitle ?? "",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-            Visibility(
-              visible: widget.description != null && widget.description != "",
-              child: Text(
-                widget.description ?? "",
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: 24.sp,
+                  width: 24.sp,
+                  child: IconButton(
+                    iconSize: 20.sp,
+                    splashRadius: 24.sp,
+                    icon: Icon(
+                      Icons.cancel_outlined,
+                      color: Theme.of(context).hintColor,
+                    ),
+                    onPressed: () => handleButtonClick(
+                      "onPressed",
+                          () async => widget.onCancel(),
+                    ),
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              height: 24.sp,
-              width: 24.sp,
-              child: IconButton(
-                iconSize: 20.sp,
-                splashRadius: 24.sp,
-                icon: Icon(
-                  Icons.cancel_outlined,
-                  color: Theme.of(context).hintColor,
-                ),
-                onPressed: () => handleButtonClick(
-                  "onPressed",
-                  () async => widget.onCancel(),
-                ),
-                padding: EdgeInsets.zero,
-                alignment: Alignment.center,
-              ),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

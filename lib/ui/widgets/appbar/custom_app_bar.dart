@@ -25,7 +25,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.centerTitle,
     this.actions,
-    this.onBackPressed,
     this.onActionPressed,
     this.barColor,
     this.tintColor,
@@ -34,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.bottom,
     this.tabController,
     this.tabs, this.textColor,
-  });
+  }) : onBackPressed = null;
 
   CustomAppBar.back({
     Key? key,
@@ -128,7 +127,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
-          elevation: 0.sp,
+          elevation: 10,
           centerTitle: centerTitle,
           backgroundColor: Theme.of(context).primaryColor,
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -142,6 +141,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       child: AppBar(
+        forceMaterialTransparency: true,
+        scrolledUnderElevation: 0.0,
         automaticallyImplyLeading: false,
         backgroundColor: barColor,
         title: Text(

@@ -8,11 +8,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ultron_clone_flutter/ui/widgets/button/outlined_elevated_button.dart';
 import 'package:ultron_clone_flutter/ui/widgets/button/solid_elevated_button.dart';
+import '../../../common/permission_manager.dart';
 import '../../ui_config.dart';
 
 import '../dialog/custom_dialog_widget.dart';
 import '../common/dialog_loading.dart';
 import '../dialog/custom_dialog.dart';
+import '../dialog/dialog_helper.dart';
 
 class TakePhotoWidget extends StatefulWidget {
   final String title;
@@ -54,10 +56,10 @@ class _TakePhotoWidget extends State<TakePhotoWidget> with WidgetsBindingObserve
               Expanded(
                 flex: 1,
                 child: SolidElevatedButton(
-                  onTap: () async {
+                  onPressed: () async {
                     bool isPermissionGranted = true;
                     if (Platform.isIOS) {
-                      isPermissionGranted = await checkCameraPermission();
+                      isPermissionGranted = await PermissionManager.checkCameraPermission();
                     }
                     if (isPermissionGranted) {
                       if (widget.photoList.length < widget.photoLimit!) {
@@ -70,9 +72,20 @@ class _TakePhotoWidget extends State<TakePhotoWidget> with WidgetsBindingObserve
                           widget.onAddPhoto(File(image.path));
                           setState(() {});
                         }
-                        Navigator.pop(context);
+                        if(context.mounted) {
+                          Navigator.pop(context);
+                        }
                       } else {
                         reachPhotoLimitDialog();
+                      }
+                    } else {
+                      if (context.mounted) {
+                        DialogHelper.showPermissionDialog(
+                          context: context,
+                          onPermissionCallback: () {
+                            setState(() {});
+                          },
+                        );
                       }
                     }
                   },
@@ -97,10 +110,10 @@ class _TakePhotoWidget extends State<TakePhotoWidget> with WidgetsBindingObserve
               Expanded(
                 flex: 1,
                 child: OutlinedElevatedButton(
-                  onTap: () async {
+                  onPressed: () async {
                     bool isPermissionGranted = true;
                     if (Platform.isIOS) {
-                      isPermissionGranted = await checkGalleryPermission();
+                      isPermissionGranted = await PermissionManager.checkGalleryPermission();
                     }
                     if (isPermissionGranted) {
                       if (widget.photoList.length < widget.photoLimit!) {
@@ -121,9 +134,18 @@ class _TakePhotoWidget extends State<TakePhotoWidget> with WidgetsBindingObserve
                         } catch (e) {
                           print("TakePhotoWidget: $e");
                         }
-                        Navigator.pop(context);
+                        if(context.mounted) {
+                          Navigator.pop(context);
+                        }
                       } else {
-                        reachPhotoLimitDialog();
+                        if (context.mounted) {
+                          DialogHelper.showPermissionDialog(
+                            context: context,
+                            onPermissionCallback: () {
+                              setState(() {});
+                            },
+                          );
+                        }
                       }
                     }
                   },
@@ -229,64 +251,6 @@ class _TakePhotoWidget extends State<TakePhotoWidget> with WidgetsBindingObserve
         ),
       ],
     );
-  }
-
-  Future<bool> checkGalleryPermission() async {
-    PermissionStatus status = await Permission.photos.status;
-    if (status.isGranted) {
-      return true;
-    } else if (status.isDenied) {
-      PermissionStatus requestStatus = await Permission.photos.request();
-      if (requestStatus.isGranted) {
-        return true;
-      } else {
-        permissionDialog();
-      }
-    } else if (status.isPermanentlyDenied) {
-      permissionDialog();
-    }
-    return false;
-  }
-
-  Future<bool> checkCameraPermission() async {
-    PermissionStatus status = await Permission.camera.status;
-    print(status.isDenied);
-    print(status.isPermanentlyDenied);
-    print(status.isRestricted);
-    print(status.isGranted);
-    print(status.isLimited);
-    if (status.isGranted) {
-      return true;
-    } else if (status.isDenied) {
-      PermissionStatus requestStatus = await Permission.camera.request();
-      if (requestStatus.isGranted) {
-        return true;
-      } else {
-        permissionDialog();
-      }
-    } else if (status.isPermanentlyDenied) {
-      permissionDialog();
-    }
-    return false;
-  }
-
-  void permissionDialog() {
-    CustomDialog(
-      context: context,
-      isOverlayTapDismiss: true,
-      hasReverseAnimate: true,
-      child: CustomDialogWidget(
-        titleImage: 'assets/images/icon_warning.png',
-        content: "請至設定開啟權限",
-        positiveBinding: BtnBindingModel(
-          btnText: "確定",
-          onBtnClick: () async {
-            Navigator.pop(context);
-            openAppSettings();
-          },
-        ),
-      ),
-    ).show().then((value) => setState(() {}));
   }
 
   void reachPhotoLimitDialog() {

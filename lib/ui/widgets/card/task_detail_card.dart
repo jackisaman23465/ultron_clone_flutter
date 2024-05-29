@@ -23,39 +23,45 @@ class TaskDetailCard extends StatelessWidget {
     return CustomCard(
       enabled: onTap != null,
       onTap: onTap,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.labelMedium,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                Visibility(
+                  visible: subtitle != null,
+                  child: Text(
+                    subtitle ?? "",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+              ],
             ),
-            Visibility(
-              visible: subtitle != null,
-              child: Text(
-                subtitle ?? "",
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
+            Column(
+              children: [
+                Icon(
+                  Icons.check_circle_rounded,
+                  color: statusIconColor,
+                  size: 30.sp,
+                ),
+                SizedBox(height: 4.sp),
+                Text(
+                  statusTitle,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
             ),
           ],
         ),
-        Column(
-          children: [
-            Icon(
-              Icons.check_circle_rounded,
-              color: statusIconColor,
-              size: 30.sp,
-            ),
-            SizedBox(height: 4.sp),
-            Text(
-              statusTitle,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

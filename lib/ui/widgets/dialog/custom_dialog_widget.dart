@@ -144,7 +144,7 @@ class CustomDialogWidget extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: SolidElevatedButton(
-                            onTap: () {
+                            onPressed: () {
                               negativeBinding?.onBtnClick();
                               // Navigator.pop(context);
                             },
@@ -163,7 +163,7 @@ class CustomDialogWidget extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: SolidElevatedButton(
-                            onTap: () {
+                            onPressed: () {
                               positiveBinding?.onBtnClick();
                             },
                             backgroundColor: positiveBinding?.backgroundColor,

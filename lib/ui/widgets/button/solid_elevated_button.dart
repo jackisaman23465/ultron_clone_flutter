@@ -5,7 +5,7 @@ import '../../ui_config.dart';
 import 'button_handler.dart';
 
 class SolidElevatedButton extends StatefulWidget {
-  final VoidCallback onTap;
+  final VoidCallback onPressed;
   final Widget child;
   final Color? backgroundColor;
   final Color? foregroundColor;
@@ -15,7 +15,7 @@ class SolidElevatedButton extends StatefulWidget {
 
   const SolidElevatedButton({
     Key? key,
-    required this.onTap,
+    required this.onPressed,
     required this.child,
     this.backgroundColor,
     this.foregroundColor,
@@ -34,15 +34,15 @@ class _SolidElevatedButtonState extends State<SolidElevatedButton> with ButtonHa
     return ElevatedButton(
       onPressed: () => handleButtonClick(
         "onPressed",
-        () async => widget.onTap(),
+        () async => widget.onPressed(),
       ),
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
+              (Set<MaterialState> states) {
             if (states.contains(MaterialState.pressed)) {
-              return widget.rippleColor ?? Theme.of(context).colorScheme.background.withOpacity(0.25); // 設置水波紋顏色
+              return widget.rippleColor ?? Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.1) ?? Colors.white; // 設置水波紋顏色
             }
-            return widget.rippleColor ?? Theme.of(context).colorScheme.background; // 無水波紋顏色
+            return widget.rippleColor ?? Theme.of(context).buttonTheme.colorScheme?.primary ?? Colors.white; // 無水波紋顏色
           },
         ),
         elevation: MaterialStateProperty.all(0.sp),

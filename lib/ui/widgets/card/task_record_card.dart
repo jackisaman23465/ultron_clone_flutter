@@ -22,30 +22,36 @@ class TaskRecordCard extends StatelessWidget {
     return CustomCard(
       enabled: enabled ?? onTap != null,
       onTap: onTap,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.labelMedium,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                Visibility(
+                  visible: subtitle != null,
+                  child: Text(
+                    subtitle ?? "",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+              ],
             ),
-            Visibility(
-              visible: subtitle != null,
-              child: Text(
-                subtitle ?? "",
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-            ),
+            onTap != null ? Icon(
+              Icons.keyboard_arrow_right,
+              color: Theme.of(context).colorScheme.secondary,
+              size: 24.sp,
+            ) : Container(),
           ],
         ),
-        onTap != null ? Icon(
-          Icons.keyboard_arrow_right,
-          color: Theme.of(context).colorScheme.secondary,
-          size: 24.sp,
-        ) : Container(),
-      ],
+      ),
     );
   }
 }

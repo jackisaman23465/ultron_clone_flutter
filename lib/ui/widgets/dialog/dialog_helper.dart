@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../dialog/custom_dialog.dart';
 import '../dialog/custom_dialog_widget.dart';
@@ -42,5 +43,31 @@ class DialogHelper {
         negativeBinding: negativeBtn,
       ),
     ).show();
+  }
+
+  static void showPermissionDialog({
+    required BuildContext context,
+    Function()? onPermissionCallback,
+  }) {
+    CustomDialog(
+      context: context,
+      isOverlayTapDismiss: true,
+      hasReverseAnimate: true,
+      child: CustomDialogWidget(
+        titleImage: 'assets/images/icon_warning.png',
+        content: "請至設定開啟權限",
+        positiveBinding: BtnBindingModel(
+          btnText: "確定",
+          onBtnClick: () async {
+            Navigator.pop(context);
+            openAppSettings();
+          },
+        ),
+      ),
+    ).show().then(
+      (value) {
+        if (onPermissionCallback != null) onPermissionCallback();
+      },
+    );
   }
 }

@@ -9,20 +9,22 @@ class CustomCard extends StatefulWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final bool enabled;
-  final List<Widget> children;
-  final CrossAxisAlignment itemAxisAlignment;
+  final Widget child;
   final EdgeInsetsGeometry? itemPadding;
   final int? longPressDuration;
+  final double? elevation;
+  final Color? color;
 
   const CustomCard({
     Key? key,
-    required this.children,
+    required this.child,
     this.onTap,
     this.onLongPress,
-    this.itemAxisAlignment = CrossAxisAlignment.center,
     this.itemPadding,
     this.enabled = true,
     this.longPressDuration,
+    this.elevation,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -36,8 +38,9 @@ class _CustomCard extends State<CustomCard> with ButtonHandler {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.color,
       margin: EdgeInsets.zero,
-      elevation: 0.sp,
+      elevation: widget.elevation ?? 2.sp,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.sp),
         side: BorderSide(
@@ -95,13 +98,7 @@ class _CustomCard extends State<CustomCard> with ButtonHandler {
             opacity: widget.enabled ? 1.0 : 0.5,
             child: Padding(
               padding: widget.itemPadding != null ? widget.itemPadding! : EdgeInsets.all(16.sp),
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: widget.itemAxisAlignment,
-                  children: widget.children,
-                ),
-              ),
+              child: widget.child,
             ),
           ),
         ), // 指定要限制高度的 Widget
