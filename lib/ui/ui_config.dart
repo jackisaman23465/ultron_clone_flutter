@@ -8,11 +8,11 @@ class UIColors{
   static const backgroundColor = Color(0xffF6F7F9);
   static const dialogBarrierColor = Color(0x88000000);
   static const buttonPrimaryColor = Color(0xff009EBE);
-  static const buttonSecondaryColor = Color(0xffE8E8E8);
+  static const buttonSecondaryColor = Color(0xffE0E0E0);
   static const borderColor = Color(0xFFE0E0E0);
   static const errorColor = Color(0xFFEF655D);
   static const disabledColor = Color(0x40000000);
-  static const normalTextColor = Color(0xCC000000);
+  static const normalTextColor = Color(0xff858585);
   static const placeholderTextColor = Color(0x70000000);
 }
 
@@ -33,8 +33,8 @@ class UIImages{
 }
 
 class UIAnimations{
-  static Duration animateDuration = const Duration(milliseconds: 250);
-  static Duration clickAnimateDuration = const Duration(milliseconds: 175);
+  static const Duration animateDuration = Duration(milliseconds: 250);
+  static const Duration clickAnimateDuration = Duration(milliseconds: 0);
 }
 
 class UIThemes{

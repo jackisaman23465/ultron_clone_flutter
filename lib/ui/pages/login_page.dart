@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ultron_clone_flutter/models/system_info.dart';
 import 'package:ultron_clone_flutter/ui/router/app_router.dart';
+import 'package:ultron_clone_flutter/ui/widgets/dialog/dialog_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '/ui/ui_config.dart';
 import '/ui/widgets/button/outlined_elevated_button.dart';
 import '/ui/widgets/button/solid_elevated_button.dart';
@@ -61,9 +62,9 @@ class _LoginPageState extends State<LoginPage> {
                     TextSpan(
                       text: '隱私權政策',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: UIColors.primaryColor,
-                            decoration: TextDecoration.underline,
-                          ),
+                        color: UIColors.primaryColor,
+                        decoration: TextDecoration.underline,
+                      ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           launchUrl(Uri.parse("https://policies.wifigarden.com/zh-tw/privacy-policy"));

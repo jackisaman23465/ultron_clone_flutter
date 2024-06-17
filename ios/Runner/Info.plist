@@ -46,8 +46,10 @@
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
 		<key>UIStatusBarHidden</key>
-		<false/>
+		<true/>
 		<key>NSCameraUsageDescription</key>
-        <string>請求相機權限以掃描QR Code</string>
+		<string>請求相機權限以掃描QR Code</string>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
 	</dict>
 </plist>

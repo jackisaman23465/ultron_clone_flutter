@@ -48,9 +48,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primaryColor: UIColors.primaryColor,
             primaryColorLight: UIColors.primaryColorLight,
-            dialogBackgroundColor: UIColors.dialogBarrierColor,
+            dialogBackgroundColor: Colors.white,
             hintColor: UIColors.placeholderTextColor,
             dividerColor: UIColors.borderColor,
+            textTheme: TextTheme(
+              titleMedium: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.sp, color: Colors.black.withOpacity(0.75)),
+              labelSmall: TextStyle(fontSize: 12.sp, color: UIColors.normalTextColor),
+            ),
             buttonTheme: ButtonThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: UIColors.primaryColor).copyWith(
                 primary: UIColors.buttonPrimaryColor,
@@ -68,13 +72,15 @@ class MyApp extends StatelessWidget {
               trackHeight: 2.h,
               trackShape: CustomSliderShape(),
             ),
-            switchTheme: SwitchThemeData(
-            ),
+            switchTheme: SwitchThemeData(),
             cardColor: Colors.white,
             cardTheme: const CardTheme(
               surfaceTintColor: Colors.white,
               color: Colors.white,
-            )
+            ),
+            dialogTheme: DialogTheme(
+              shadowColor: UIColors.dialogBarrierColor,
+            ),
             // useMaterial3: true,
           ),
         );

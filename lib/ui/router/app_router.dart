@@ -6,6 +6,7 @@ import 'package:ultron_clone_flutter/ui/pages/notification_page.dart';
 import 'package:ultron_clone_flutter/ui/pages/qrcode_scan_page.dart';
 import 'package:ultron_clone_flutter/ui/pages/setting_page.dart';
 import 'package:ultron_clone_flutter/ui/router/animation/FadeTransitionPage.dart';
+import 'package:ultron_clone_flutter/ui/widgets/dialog/dialog_helper.dart';
 
 import '../pages/main_page.dart';
 import '../pages/onboarding_page.dart';
@@ -40,6 +41,10 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.loginPage,
+        onExit: (context, state) {
+          DialogHelper.existAppDialog(context);
+          return Future.value(false);
+        },
         pageBuilder: (context, state) {
           return SlideTransitionPage(
             child: const LoginPage(),
