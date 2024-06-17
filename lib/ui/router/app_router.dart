@@ -5,13 +5,13 @@ import 'package:ultron_clone_flutter/ui/pages/main/automated/add_new_automated_s
 import 'package:ultron_clone_flutter/ui/pages/notification_page.dart';
 import 'package:ultron_clone_flutter/ui/pages/qrcode_scan_page.dart';
 import 'package:ultron_clone_flutter/ui/pages/setting_page.dart';
-import 'package:ultron_clone_flutter/ui/router/animation/FadeTransitionPage.dart';
+import 'package:ultron_clone_flutter/ui/router/animation/fade_transition_page.dart';
 import 'package:ultron_clone_flutter/ui/widgets/dialog/dialog_helper.dart';
 
 import '../pages/main_page.dart';
 import '../pages/onboarding_page.dart';
 import '../pages/login_page.dart';
-import 'animation/SlideTransitionPage.dart';
+import 'animation/slide_transition_page.dart';
 
 class Routes {
   static String onBoardingPage = '/onboarding';
