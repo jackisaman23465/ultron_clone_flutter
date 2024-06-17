@@ -28,10 +28,10 @@ class CustomCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomCard> createState() => _CustomCard();
+  State<CustomCard> createState() => _CustomCardState();
 }
 
-class _CustomCard extends State<CustomCard> with ButtonHandler {
+class _CustomCardState extends State<CustomCard> with ButtonHandler {
   bool _isLongPress = false;
   Timer? timer;
 
@@ -40,7 +40,7 @@ class _CustomCard extends State<CustomCard> with ButtonHandler {
     return Card(
       color: widget.color,
       margin: EdgeInsets.zero,
-      elevation: widget.elevation ?? 2.sp,
+      elevation: widget.elevation ?? 1.h,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.sp),
         side: BorderSide(

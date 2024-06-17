@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../dialog/custom_dialog.dart';
@@ -12,7 +13,8 @@ class DialogHelper {
       isOverlayTapDismiss: true,
       hasReverseAnimate: true,
       child: CustomDialogWidget(
-        title: "確定離開?",
+        title: "離開Ultron?",
+        titleStyle: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold),
         positiveBinding: BtnBindingModel(
           btnText: "離開",
           onBtnClick: () => SystemChannels.platform.invokeMethod('SystemNavigator.pop'),

@@ -19,6 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final TabController? tabController;
   final List<Tab>? tabs;
+  final IconData? backIcon;
 
   const CustomAppBar({
     super.key,
@@ -32,8 +33,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.bottom,
     this.tabController,
-    this.tabs, this.textColor,
-  }) : onBackPressed = null;
+    this.tabs,
+    this.textColor,
+  })  : onBackPressed = null,
+        backIcon = null;
 
   CustomAppBar.back({
     Key? key,
@@ -43,10 +46,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.barColor,
     this.tintColor = Colors.white,
     this.isDarkStatusBar = false,
-    this.bottom, this.textColor,
+    this.bottom,
+    this.textColor,
+    this.backIcon = Icons.arrow_back_ios_new,
   })  : assert(onBackPressed != null),
         leading = IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: tintColor),
+          icon: Icon(backIcon, color: tintColor),
           onPressed: () async {
             // await Future.delayed(AnimationConfig.clickAnimateDuration);
             if (onBackPressed != null) {
@@ -68,9 +73,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.barColor,
     this.tintColor = Colors.white,
-    this.isDarkStatusBar = false, this.textColor,
+    this.isDarkStatusBar = false,
+    this.textColor,
+    this.backIcon,
   })  : leading = IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: tintColor),
+          icon: Icon(backIcon, color: tintColor),
           onPressed: () async {
             // await Future.delayed(AnimationConfig.clickAnimateDuration);
             if (onBackPressed != null) {
@@ -108,9 +115,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.tintColor = Colors.white,
     this.isDarkStatusBar = false,
     required this.tabController,
-    required this.tabs, this.textColor,
+    required this.tabs,
+    this.textColor,
   })  : assert(tabController != null),
         assert(tabs != null),
+        backIcon = null,
         actions = null,
         bottom = TabBar(
           controller: tabController,

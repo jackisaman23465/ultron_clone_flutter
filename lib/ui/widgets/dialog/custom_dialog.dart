@@ -21,7 +21,7 @@ class CustomDialog {
     required this.context,
     required this.child,
     this.animationType = AnimationType.slide,
-    this.animationDuration = const Duration(milliseconds: 700),
+    this.animationDuration = UIAnimations.animateDuration,
     this.isOverlayTapDismiss = false,
     this.overlayColor,
     this.hasReverseAnimate = true,
@@ -32,11 +32,14 @@ class CustomDialog {
     return await showGeneralDialog(
       context: context,
       pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
-        return _buildDialog();
+        return ConstrainedBox(
+          constraints: constraints ?? const BoxConstraints.expand(width: double.infinity, height: double.infinity),
+          child: child,
+        );
       },
       barrierDismissible: isOverlayTapDismiss,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: overlayColor ?? Theme.of(context).dialogBackgroundColor,
+      barrierColor: overlayColor ?? Theme.of(context).dialogTheme.shadowColor ?? Colors.black12,
       transitionDuration: animationDuration,
       transitionBuilder: (
         BuildContext context,

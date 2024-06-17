@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CardList extends StatelessWidget {
+class CustomList extends StatelessWidget {
   final List<Widget> cards;
   final EdgeInsets? padding;
   final Axis scrollDirection;
   final bool shrinkWrap;
+  final double? itemSpacing;
 
-  const CardList({
+  const CustomList({
     Key? key,
     required this.cards,
     this.padding,
     this.scrollDirection = Axis.vertical,
     this.shrinkWrap = true,
+    this.itemSpacing,
   }) : super(key: key);
 
   @override
@@ -25,9 +27,9 @@ class CardList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return cards[index];
       },
-      separatorBuilder: (BuildContext context, int index) => SizedBox(
-        height: 4.sp
-      ),
+      separatorBuilder: (BuildContext context, int index) {
+        return scrollDirection == Axis.vertical ? SizedBox(height: itemSpacing ?? 12.h) : SizedBox(width: itemSpacing ?? 12.w);
+      },
     );
   }
 }
